@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="GBK">
+    <title>第一个 Highcharts 图表</title>
+    <style type="text/css">
+    container1.pos_right
+    {
+    position:relative;
+	left:600px
+    }
+    </style>
+</head>
+<body>
+    <!-- 图表容器 DOM -->
+    <div id="container" style="width: 600px;height:400px;margin-left:0 auto;"></div>
+    <div id="container1" style="width: 600px;height:400px;margin-left:0"></div>
+    <!-- 引入 highcharts.js -->
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <script>
+       var chart = Highcharts.chart('container', {
+		chart: {
+				type: 'spline'
+		},
+		title: {
+				text: '两地月平均温度'
+		},
+		subtitle: {
+				text: '数据来源: WorldClimate.com'
+		},
+		xAxis: {
+				categories: ['一月', '二月', '三月', '四月', '五月', '六月',
+										 '七月', '八月', '九月', '十月', '十一月', '十二月']
+		},
+		yAxis: {
+				title: {
+						text: '温度'
+				},
+				labels: {
+						formatter: function () {
+								return this.value + '°';
+						}
+				}
+		},
+		tooltip: {
+				crosshairs: true,
+				shared: true
+		},
+		plotOptions: {
+				spline: {
+						marker: {
+								radius: 4,
+								lineColor: '#666666',
+								lineWidth: 1
+						}
+				}
+		},
+		series: [{
+				name: '东京',
+				marker: {
+						symbol: 'square'
+				},
+				data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, {
+						y: 26.5,
+						marker: {
+								symbol: 'url(https://www.highcharts.com/demo/gfx/sun.png)'
+						}
+				}, 23.3, 18.3, 13.9, 9.6]
+		}, {
+				name: '伦敦',
+				marker: {
+						symbol: 'diamond'
+				},
+				data: [{
+						y: 3.9,
+						marker: {
+								symbol: 'url(https://www.highcharts.com/demo/gfx/snow.png)'
+						}
+				}, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+		}]
+});
+
+	var chart = Highcharts.chart('container1', {
+		chart: {
+				type: 'spline',
+				inverted: true
+		},
+		title: {
+				text: '大气温度和海拔高度关系'
+		},
+		subtitle: {
+				text: '根据标准大气模型绘制'
+		},
+		xAxis: {
+				reversed: false,
+				title: {
+						enabled: true,
+						text: '海拔高度'
+				},
+				labels: {
+						formatter: function () {
+								return this.value + 'km';
+						}
+				},
+				maxPadding: 0.05,
+				showLastLabel: true
+		},
+		yAxis: {
+				title: {
+						text: '温度'
+				},
+				labels: {
+						formatter: function () {
+								return this.value + '°';
+						}
+				},
+				lineWidth: 2
+		},
+		legend: {
+				enabled: false
+		},
+		tooltip: {
+				headerFormat: '<b>{series.name}</b><br/>',
+				pointFormat: '{point.x} km: {point.y}°C'
+		},
+		plotOptions: {
+				spline: {
+						marker: {
+								enable: false
+						}
+				}
+		},
+		series: [{
+				name: '温度',
+				data: [[0, 15], [10, -50], [20, -56.5], [30, -46.5], [40, -22.1],
+							 [50, -2.5], [60, -27.7], [70, -55.7], [80, -76.5]]
+		}]
+});
+	
+
+    </script>
+</body>
+</html>
